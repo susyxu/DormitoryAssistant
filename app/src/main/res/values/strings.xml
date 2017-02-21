@@ -1,0 +1,17 @@
+<resources>
+    <string name="app_name">寝室助手</string>
+
+    <!--学生主界面标题-->
+    <string name="title_news">寝室公告</string>
+    <string name="title_subscribe">我的预定</string>
+    <string name="title_repair">寝室维修</string>
+    <string name="title_me">个人信息</string>
+
+    <!--管理员主界面标题-->
+    <string name="title_score">寝室评分</string>
+    <string name="title_cost">水电费</string>
+    <string name="title_contact">通讯录</string>
+
+    <!--外来人员主界面标题-->
+    <string name="title_function">功能模块</string>
+</resources>

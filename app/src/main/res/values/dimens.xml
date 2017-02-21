@@ -1,0 +1,25 @@
+<resources>
+    <!-- Default screen margins, per the Android Design guidelines. -->
+    <dimen name="activity_horizontal_margin">16dp</dimen>
+    <dimen name="activity_vertical_margin">16dp</dimen>
+
+    <!--Login-->
+    <dimen name="BtnLoginTextSize">18sp</dimen>
+    <dimen name="BtnRegTextSize">18sp</dimen>
+    <dimen name="EtLoginTextSize">18sp</dimen>
+    <dimen name="TvCopyrightTextSize">14sp</dimen>
+
+    <!--Dialog-->
+    <dimen name="BtnDialogTextSize">18sp</dimen>
+    <dimen name="TvDialogTextSize">18sp</dimen>
+    <dimen name="EtDialogTextSize">18sp</dimen>
+
+    <!--Common-->
+    <dimen name="BiggerTextSize">20sp</dimen>
+    <dimen name="BigTextSize">18sp</dimen>
+    <dimen name="SmallTextSize">16sp</dimen>
+    <dimen name="SmallerTextSize">14sp</dimen>
+    <dimen name="ColorfulBtnTextSize">18sp</dimen>
+    <dimen name="TabTextSize">18sp</dimen>
+
+</resources>
