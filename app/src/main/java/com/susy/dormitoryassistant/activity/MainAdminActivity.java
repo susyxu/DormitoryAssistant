@@ -23,8 +23,8 @@ import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.fragment.AdminContactFragment;
 import com.susy.dormitoryassistant.fragment.AdminCostFragment;
 import com.susy.dormitoryassistant.fragment.AdminMeFragment;
-import com.susy.dormitoryassistant.fragment.AdminNewsFragment;
 import com.susy.dormitoryassistant.fragment.AdminScoreFragment;
+import com.susy.dormitoryassistant.fragment.StudentNewsFragment;
 import com.susy.dormitoryassistant.utils.CustomViewPager;
 
 import java.util.ArrayList;
@@ -87,7 +87,7 @@ public class MainAdminActivity extends AppCompatActivity implements View.OnClick
         mTabNews.setTag(pageIndex);
         buttonLayout.addView(mTabNews, width, LinearLayout.LayoutParams.MATCH_PARENT);
         mNewsImg = (ImageButton) mTabNews.findViewById(R.id.id_tab_news_img);
-        fragments.add(new AdminNewsFragment());
+        fragments.add(new StudentNewsFragment());
         pageIndex++;
 
         mTabScore = (LinearLayout) LayoutInflater.from(this).inflate(R.layout.tab_scorebutton, null);

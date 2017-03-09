@@ -5,10 +5,14 @@ import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.util.Log;
 import android.view.View;
+import android.widget.AdapterView;
+import android.widget.ArrayAdapter;
 import android.widget.Button;
 import android.widget.EditText;
+import android.widget.Spinner;
 
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.entity.LoginUser;
 import com.susy.dormitoryassistant.entity.Student;
 import com.susy.dormitoryassistant.http.AppClient;
 
@@ -20,23 +24,26 @@ import retrofit2.Response;
  * 登入界面
  * Created by susy on 17/2/4.
  */
-public class LoginActivity extends AppCompatActivity{
+public class LoginActivity extends AppCompatActivity {
 
     private Button btn_studentLogin;
     private Button btn_adminLogin;
     private Button btn_workerLogin;
 
+    private Spinner sp_type;
     private EditText et_username;
     private EditText et_pwd;
     private Button btn_login;
 
+    private String type="";
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login);
 
-        btn_studentLogin = (Button)findViewById(R.id.btn_studentLogin);
+        //测试用的按钮
+        btn_studentLogin = (Button) findViewById(R.id.btn_studentLogin);
         btn_studentLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -46,7 +53,7 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        btn_adminLogin = (Button)findViewById(R.id.btn_adminLogin);
+        btn_adminLogin = (Button) findViewById(R.id.btn_adminLogin);
         btn_adminLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -56,7 +63,7 @@ public class LoginActivity extends AppCompatActivity{
             }
         });
 
-        btn_workerLogin = (Button)findViewById(R.id.btn_workerLogin);
+        btn_workerLogin = (Button) findViewById(R.id.btn_workerLogin);
         btn_workerLogin.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
@@ -67,20 +74,82 @@ public class LoginActivity extends AppCompatActivity{
         });
 
 
-        //
-        et_username = (EditText)findViewById(R.id.et_username);
-        et_pwd = (EditText)findViewById(R.id.et_pwd);
-        btn_login = (Button)findViewById(R.id.btn_login);
+        //正式代码
+        sp_type = (Spinner) findViewById(R.id.sp_type);
+        et_username = (EditText) findViewById(R.id.et_username);
+        et_pwd = (EditText) findViewById(R.id.et_pwd);
+
+        String[] items = getResources().getStringArray(R.array.type);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_type.setAdapter(adapter);
+        sp_type.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> parent, View view, int position, long id) {
+                if (sp_type.getSelectedItem().toString().equals("学生")){
+                    type = "";    //待修改
+                }
+                if (sp_type.getSelectedItem().toString().equals("寝室管理员")){
+                    type = "user";
+                }
+                if (sp_type.getSelectedItem().toString().equals("外来工作人员")){
+                    type = "";    //待修改
+                }
+            }
+            @Override
+            public void onNothingSelected(AdapterView<?> parent) {
+                type = "";
+            }
+        });
+
+        btn_login = (Button) findViewById(R.id.btn_login);
         btn_login.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                getStudent();
+                //getStudent();   测试用
+                login();
             }
         });
     }
 
+    private void login() {
+        String username="";
+        String password="";
+        username = et_username.getText().toString();
+        password = et_pwd.getText().toString();
+        AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
+        Call<LoginUser> call = apiStores.appLogin(type,username,password);
+        call.enqueue(new Callback<LoginUser>() {
+            @Override
+            public void onResponse(Call<LoginUser> call, Response<LoginUser> response) {
+                Log.i("logintest",response.body().getInfo());
+                startApp(type);
+            }
 
-    private void getStudent(){
+            @Override
+            public void onFailure(Call<LoginUser> call, Throwable t) {
+
+            }
+        });
+    }
+
+    private void startApp(String type) {
+        if(type.equals("")){    //待修改
+
+        }
+        if(type.equals("user")){
+            Intent intent = new Intent(LoginActivity.this, MainAdminActivity.class);
+            startActivity(intent);
+            //LoginActivity.this.finish();
+        }
+        if(type.equals("")){    //待修改
+
+        }
+    }
+
+
+    //测试用
+    private void getStudent() {
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
         Call<Student> call = apiStores.getStudent("31301215");
         call.enqueue(new Callback<Student>() {

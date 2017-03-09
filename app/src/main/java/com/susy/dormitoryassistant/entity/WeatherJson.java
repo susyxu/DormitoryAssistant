@@ -15,20 +15,15 @@ public class WeatherJson {
         this.weatherinfo = weatherinfo;
     }
 
-    //city、cityid必须对应json数据的名称，不然解析不了
     public class Weatherinfo {
         private String city;
         private String cityid;
-        private String temp;
-        private String WD;
-        private String WS;
-        private String SD;
-        private String WSE;
-        private String time;
-        private String isRadar;
-        private String Radar;
-        private String njd;
-        private String qy;
+        private String temp1;
+        private String temp2;
+        private String weather;
+        private String img1;
+        private String img2;
+        private String ptime;
 
         public String getCity() {
             return city;
@@ -46,84 +41,52 @@ public class WeatherJson {
             this.cityid = cityid;
         }
 
-        public String getTemp() {
-            return temp;
+        public String getTemp1() {
+            return temp1;
         }
 
-        public void setTemp(String temp) {
-            this.temp = temp;
+        public void setTemp1(String temp1) {
+            this.temp1 = temp1;
         }
 
-        public String getWD() {
-            return WD;
+        public String getTemp2() {
+            return temp2;
         }
 
-        public void setWD(String WD) {
-            this.WD = WD;
+        public void setTemp2(String temp2) {
+            this.temp2 = temp2;
         }
 
-        public String getWS() {
-            return WS;
+        public String getWeather() {
+            return weather;
         }
 
-        public void setWS(String WS) {
-            this.WS = WS;
+        public void setWeather(String weather) {
+            this.weather = weather;
         }
 
-        public String getSD() {
-            return SD;
+        public String getImg1() {
+            return img1;
         }
 
-        public void setSD(String SD) {
-            this.SD = SD;
+        public void setImg1(String img1) {
+            this.img1 = img1;
         }
 
-        public String getWSE() {
-            return WSE;
+        public String getImg2() {
+            return img2;
         }
 
-        public void setWSE(String WSE) {
-            this.WSE = WSE;
+        public void setImg2(String img2) {
+            this.img2 = img2;
         }
 
-        public String getTime() {
-            return time;
+        public String getPtime() {
+            return ptime;
         }
 
-        public void setTime(String time) {
-            this.time = time;
-        }
-
-        public String getIsRadar() {
-            return isRadar;
-        }
-
-        public void setIsRadar(String isRadar) {
-            this.isRadar = isRadar;
-        }
-
-        public String getRadar() {
-            return Radar;
-        }
-
-        public void setRadar(String radar) {
-            Radar = radar;
-        }
-
-        public String getNjd() {
-            return njd;
-        }
-
-        public void setNjd(String njd) {
-            this.njd = njd;
-        }
-
-        public String getQy() {
-            return qy;
-        }
-
-        public void setQy(String qy) {
-            this.qy = qy;
+        public void setPtime(String ptime) {
+            this.ptime = ptime;
         }
     }
 }

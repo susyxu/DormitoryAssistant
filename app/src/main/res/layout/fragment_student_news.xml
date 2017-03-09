@@ -1,17 +1,129 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
-              android:orientation="vertical"
-              android:layout_width="match_parent"
-              android:layout_height="match_parent">
-    <TextView
-        android:gravity="center"
+<ScrollView xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent">
+
+    <LinearLayout
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="student_news"/>
-    <TextView
-        android:id="@+id/weather"
-        android:gravity="center"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:text="weather"/>
-</LinearLayout>
+        android:layout_height="match_parent"
+        android:orientation="vertical">
+
+        <LinearLayout
+            android:padding="24dp"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#993F51B5"
+            android:orientation="vertical">
+
+            <TextView
+                android:textSize="@dimen/SmallTextSize"
+                android:id="@+id/tv_date"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#ffffff" />
+
+            <TextView
+                android:textSize="@dimen/BigTextSize"
+                android:id="@+id/tv_weather"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="center"
+                android:text=""
+                android:textColor="#ffffff" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="#ffffff"
+            android:minHeight="164dp"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg_info"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"></RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="4"
+                android:minLines="4"
+                android:padding="8dp"
+                android:textSize="@dimen/SmallerTextSize"
+                android:text="哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈哈哈啊哈哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈哈哈哈啊" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#eeeeee" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="16dp"
+                android:paddingTop="6dp"
+                android:text="详情>>"
+                android:textSize="@dimen/SmallestTextSize"
+                android:id="@+id/textView" />
+        </LinearLayout>
+
+        <LinearLayout
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_marginTop="32dp"
+            android:background="#ffffff"
+            android:minHeight="164dp"
+            android:orientation="vertical">
+
+            <RadioGroup
+                android:id="@+id/rg_info2"
+                android:layout_width="match_parent"
+                android:layout_height="48dp"
+                android:orientation="horizontal"></RadioGroup>
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:background="#eeeeee" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:maxLines="4"
+                android:minLines="4"
+                android:padding="8dp"
+                android:textSize="@dimen/SmallerTextSize"
+                android:text="哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈哈哈啊哈哈哈哈哈啊哈哈哈哈哈哈哈啊哈哈哈哈哈啊" />
+
+            <View
+                android:layout_width="match_parent"
+                android:layout_height="1dp"
+                android:layout_marginLeft="8dp"
+                android:layout_marginRight="8dp"
+                android:background="#eeeeee" />
+
+            <TextView
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:gravity="right"
+                android:paddingRight="16dp"
+                android:paddingTop="6dp"
+                android:text="详情>>"
+                android:textSize="@dimen/SmallestTextSize" />
+        </LinearLayout>
+
+    </LinearLayout>
+</ScrollView>
