@@ -2,6 +2,7 @@ package com.susy.dormitoryassistant.http;
 
 import android.util.Log;
 
+import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
 import com.susy.dormitoryassistant.entity.Student;
 
@@ -56,9 +57,14 @@ public class AppClient {
         Call<Student> getStudent(@Query("studentId") String studentId);
 
         @GET("login/loginApp?")
-        Call<LoginUser> appLogin(@Query("type") String type,
+        Call<LoginUser> appUserLogin(@Query("type") String type,
                                  @Query("username") String username,
                                  @Query("password") String password);
+
+        @GET("login/loginApp?")
+        Call<LoginStudent> appStudentLogin(@Query("type") String type,
+                                           @Query("username") String username,
+                                           @Query("password") String password);
     }
 
 }
