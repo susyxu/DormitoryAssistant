@@ -33,7 +33,7 @@
                     android:id="@+id/tvName"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="许伸"
+                    android:text=""
                     android:textColor="#000000"
                     android:textSize="@dimen/SmallTextSize" />
 
@@ -41,7 +41,7 @@
                     android:id="@+id/tvID"
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
-                    android:text="学号：31301193"
+                    android:text=""
                     android:textColor="#747474"
                     android:textSize="@dimen/SmallTextSize" />
 

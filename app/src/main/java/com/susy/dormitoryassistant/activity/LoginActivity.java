@@ -12,6 +12,7 @@ import android.widget.EditText;
 import android.widget.Spinner;
 
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
 import com.susy.dormitoryassistant.entity.Student;
@@ -38,10 +39,12 @@ public class LoginActivity extends AppCompatActivity {
     private Button btn_login;
 
     private String type = "";
+    private DormitoryApplication mApplication = null;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
+        mApplication = DormitoryApplication.getmInstance();
         setContentView(R.layout.activity_login);
 
         //测试用的按钮
@@ -139,7 +142,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<LoginStudent> call, Response<LoginStudent> response) {
                     Log.i("PrintSLoginInfo", response.body().getInfo());
                     if (response.body().getInfo().equals("学生登陆成功")) {
-                        startApp(type);
+                        LoginStudent globalStudent = response.body();
+                        mApplication.setGlobalStudent(globalStudent);
+                        startApp(sp_type.getSelectedItem().toString());
                     }
                     else {
                         UtilTools.showToast(LoginActivity.this,response.body().getInfo());
@@ -159,7 +164,9 @@ public class LoginActivity extends AppCompatActivity {
                 public void onResponse(Call<LoginUser> call, Response<LoginUser> response) {
                     Log.i("PrintULoginInfo", response.body().getInfo());
                     if (response.body().getInfo().equals("用户登陆成功")) {
-                        startApp(type);
+                        LoginUser globalUser = response.body();
+                        mApplication.setGlobalUser(globalUser);
+                        startApp(sp_type.getSelectedItem().toString());
                     }
                     else {
                         UtilTools.showToast(LoginActivity.this,response.body().getInfo());
@@ -178,17 +185,17 @@ public class LoginActivity extends AppCompatActivity {
      * 启动对应角色的app
      */
     private void startApp(String type) {
-        if (type.equals("student")) {
+        if (type.equals("学生")) {
             Intent intent = new Intent(LoginActivity.this, MainStudentActivity.class);
             startActivity(intent);
             LoginActivity.this.finish();
         }
-        if (type.equals("user")) {
+        if (type.equals("寝室管理员")) {
             Intent intent = new Intent(LoginActivity.this, MainAdminActivity.class);
             startActivity(intent);
             LoginActivity.this.finish();
         }
-        if (type.equals("user")) {
+        if (type.equals("外来工作人员")) {
             Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
             startActivity(intent);
             LoginActivity.this.finish();

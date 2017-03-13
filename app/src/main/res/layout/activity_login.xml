@@ -44,7 +44,8 @@
         android:id="@+id/et_pwd"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:hint="pwd" />
+        android:hint="pwd"
+        android:inputType="textPassword"/>
 
     <Button
         android:id="@+id/btn_login"

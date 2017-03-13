@@ -4,7 +4,9 @@ import android.util.Log;
 
 import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
+import com.susy.dormitoryassistant.entity.SaveWaterOrder;
 import com.susy.dormitoryassistant.entity.Student;
+import com.susy.dormitoryassistant.entity.WaterOrder;
 
 import java.util.ArrayList;
 
@@ -65,6 +67,13 @@ public class AppClient {
         Call<LoginStudent> appStudentLogin(@Query("type") String type,
                                            @Query("username") String username,
                                            @Query("password") String password);
+
+        @GET("waterOrder/addOrder?")
+        Call<SaveWaterOrder> studentAddwater(@Query("studentId") String studentId,
+                                             @Query("count") String count,
+                                             @Query("dormitoryId") String dormitoryId);
+        @GET("waterOrder/{studentId}")
+        Call<ArrayList<WaterOrder>> studentGetWaterOrder(@Path("studentId") String studentId);
     }
 
 }

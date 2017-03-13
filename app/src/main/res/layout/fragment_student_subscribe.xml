@@ -28,11 +28,12 @@
                 android:src="@drawable/student_yy_dingshui" />
 
             <TextView
+                android:id="@+id/textView2"
                 android:layout_width="wrap_content"
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:gravity="center_vertical"
-                android:text="订饮用水"
+                android:text="预定饮用水"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/SmallTextSize" />
 
@@ -64,16 +65,17 @@
                 android:layout_height="match_parent"
                 android:layout_marginLeft="16dp"
                 android:gravity="center_vertical"
-                android:text="订酸牛奶"
+                android:text="查看订牛奶"
                 android:textColor="@color/colorTextBlack"
                 android:textSize="@dimen/SmallTextSize" />
         </LinearLayout>
     </LinearLayout>
 
-    <ScrollView
-        android:background="#ffffff"
-        android:layout_width="match_parent"
-        android:layout_height="match_parent">
 
-    </ScrollView>
+    <ListView
+        android:background="#ffffff"
+        android:id="@+id/lv_water"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"></ListView>
+
 </LinearLayout>
