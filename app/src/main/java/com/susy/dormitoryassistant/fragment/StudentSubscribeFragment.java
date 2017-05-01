@@ -11,11 +11,13 @@ import android.widget.LinearLayout;
 import android.widget.ListView;
 
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.activity.StudentAddMilkActivity;
 import com.susy.dormitoryassistant.activity.StudentAddWaterActivity;
 import com.susy.dormitoryassistant.adapter.WaterOrderAdapter;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.WaterOrder;
+import com.susy.dormitoryassistant.entity.WaterOrders;
 import com.susy.dormitoryassistant.http.AppClient;
 
 import java.util.ArrayList;
@@ -36,6 +38,7 @@ public class StudentSubscribeFragment extends Fragment implements View.OnClickLi
     private LinearLayout ll_milk;
     private ListView lv_water;
 
+    private WaterOrders mOrders = new WaterOrders();
     private List<WaterOrder> mWaterOrderList = new ArrayList<WaterOrder>();
     private WaterOrderAdapter mAdapter;
     private DormitoryApplication mApplication = null;
@@ -44,7 +47,9 @@ public class StudentSubscribeFragment extends Fragment implements View.OnClickLi
      * 刷新
      */
     public void update() {
-        initListViewData();
+        if(mApplication.getGlobalStudent()!=null){
+            initListViewData();
+        }
     }
 
     @Nullable
@@ -78,18 +83,19 @@ public class StudentSubscribeFragment extends Fragment implements View.OnClickLi
     private void initListViewData() {
         mWaterOrderList.clear();
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
-        Call<ArrayList<WaterOrder>> call = apiStores.studentGetWaterOrder(mApplication.getGlobalStudent().getData().getStudentId());
-        call.enqueue(new Callback<ArrayList<WaterOrder>>() {
+        Call<WaterOrders> call = apiStores.studentGetWaterOrder(mApplication.getGlobalStudent().getData().getStudentId());
+        call.enqueue(new Callback<WaterOrders>() {
             @Override
-            public void onResponse(Call<ArrayList<WaterOrder>> call, Response<ArrayList<WaterOrder>> response) {
+            public void onResponse(Call<WaterOrders> call, Response<WaterOrders> response) {
                 if(response.body()!=null){
-                    mWaterOrderList = response.body();
+                    mOrders = response.body();
+                    mWaterOrderList = mOrders.getData();
                     mAdapter.refresh(mWaterOrderList);
                 }
             }
 
             @Override
-            public void onFailure(Call<ArrayList<WaterOrder>> call, Throwable t) {
+            public void onFailure(Call<WaterOrders> call, Throwable t) {
 
             }
         });
@@ -103,6 +109,8 @@ public class StudentSubscribeFragment extends Fragment implements View.OnClickLi
                 startActivity(intent);
                 break;
             case R.id.ll_milk:
+                intent = new Intent(getActivity(), StudentAddMilkActivity.class);
+                startActivity(intent);
                 break;
         }
     }

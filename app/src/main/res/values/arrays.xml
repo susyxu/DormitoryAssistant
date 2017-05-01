@@ -5,4 +5,35 @@
         <item>寝室管理员 </item>
         <item>外来工作人员</item>
     </string-array>
+
+    <string-array name="milktype">
+        <item>新希望牛奶</item>
+        <item>美丽健牛奶</item>
+        <item>味全牛奶</item>
+        <item>光明牛奶</item>
+        <item>蒙牛牛奶</item>
+    </string-array>
+
+    <string-array name="milkmonth">
+        <item>01月份</item>
+        <item>02月份</item>
+        <item>03月份</item>
+        <item>04月份</item>
+        <item>05月份</item>
+        <item>06月份</item>
+        <item>07月份</item>
+        <item>08月份</item>
+        <item>09月份</item>
+        <item>10月份</item>
+        <item>11月份</item>
+        <item>12月份</item>
+    </string-array>
+
+    <string-array name="repairtype">
+        <item>xxx</item>
+        <item>yyy</item>
+        <item>zzz</item>
+        <item>aaa</item>
+        <item>bbb</item>
+    </string-array>
 </resources>

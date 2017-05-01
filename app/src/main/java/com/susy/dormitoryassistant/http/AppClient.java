@@ -4,9 +4,16 @@ import android.util.Log;
 
 import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
+import com.susy.dormitoryassistant.entity.MilkOrder;
+import com.susy.dormitoryassistant.entity.MilkOrders;
+import com.susy.dormitoryassistant.entity.RepairOrder;
+import com.susy.dormitoryassistant.entity.RepairOrders;
+import com.susy.dormitoryassistant.entity.SaveMilkOrder;
+import com.susy.dormitoryassistant.entity.SaveRepairOrder;
 import com.susy.dormitoryassistant.entity.SaveWaterOrder;
 import com.susy.dormitoryassistant.entity.Student;
 import com.susy.dormitoryassistant.entity.WaterOrder;
+import com.susy.dormitoryassistant.entity.WaterOrders;
 
 import java.util.ArrayList;
 
@@ -24,10 +31,11 @@ import retrofit2.http.Query;
  */
 public class AppClient {
     static Retrofit mRetrofit;
+
     public static Retrofit retrofit() {
         if (mRetrofit == null) {
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl("http://115.159.217.61:8080/zzz/")
+                    .baseUrl("http://115.159.217.61:8080/dorm-api/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(getOkHttpClient())
                     .build();
@@ -37,12 +45,12 @@ public class AppClient {
 
     private static OkHttpClient getOkHttpClient() {
         //日志显示级别
-        HttpLoggingInterceptor.Level level= HttpLoggingInterceptor.Level.BODY;
+        HttpLoggingInterceptor.Level level = HttpLoggingInterceptor.Level.BODY;
         //新建log拦截器
-        HttpLoggingInterceptor loggingInterceptor=new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
+        HttpLoggingInterceptor loggingInterceptor = new HttpLoggingInterceptor(new HttpLoggingInterceptor.Logger() {
             @Override
             public void log(String message) {
-                Log.d("myRequestURL","OkHttp====Message:"+message);
+                Log.d("myRequestURL", "OkHttp====Message:" + message);
             }
         });
         loggingInterceptor.setLevel(level);
@@ -58,22 +66,90 @@ public class AppClient {
         @GET("json/getStudent?")
         Call<Student> getStudent(@Query("studentId") String studentId);
 
+        /**
+         * 用户登入
+         */
         @GET("login/loginApp?")
         Call<LoginUser> appUserLogin(@Query("type") String type,
-                                 @Query("username") String username,
-                                 @Query("password") String password);
+                                     @Query("username") String username,
+                                     @Query("password") String password);
 
         @GET("login/loginApp?")
         Call<LoginStudent> appStudentLogin(@Query("type") String type,
                                            @Query("username") String username,
                                            @Query("password") String password);
 
+        /**
+         * 预定水
+         */
         @GET("waterOrder/addOrder?")
         Call<SaveWaterOrder> studentAddwater(@Query("studentId") String studentId,
                                              @Query("count") String count,
                                              @Query("dormitoryId") String dormitoryId);
+
         @GET("waterOrder/{studentId}")
-        Call<ArrayList<WaterOrder>> studentGetWaterOrder(@Path("studentId") String studentId);
+        Call<WaterOrders> studentGetWaterOrder(@Path("studentId") String studentId);
+
+        /**
+         * 预定牛奶
+         */
+        @GET("milkOrder/addOrder?")
+        Call<SaveMilkOrder> studentAddMilk(@Query("studentId") String studentId,
+                                           @Query("dormitoryId") String dormitoryId,
+                                           @Query("milkMonth") String milkMonth,
+                                           @Query("milkType") String milkType,
+                                           @Query("milkCount") String milkCount);
+
+        @GET("milkOrder/{studentId}")
+        Call<MilkOrders> studentGetMilkOrder(@Path("studentId") String studentId);
+
+        /**
+         * 预约维修
+         */
+        @GET("repairOrder/addOrder?")
+        Call<SaveRepairOrder> studentAddRepair(@Query("studentId") String studentId,
+                                               @Query("dormitoryId") String dormitoryId,
+                                               @Query("repairOrderItem") String repairOrderItem,
+                                               @Query("repairOrderDetail") String repairOrderDetail,
+                                               @Query("repairOrderFreeTime") String repairOrderFreeTime);
+
+        @GET("repairOrder/{studentId}")
+        Call<RepairOrders> studentGetRepairOrder(@Path("studentId") String studentId);
+
+        /**
+         * 修改用户密码
+         */
+        @GET("login/changeAppPwd?")
+        Call<LoginUser> changeUserPwd(@Query("type") String type,
+                                      @Query("username") String username,
+                                      @Query("oldPassword") String oldPassword,
+                                      @Query("newPassword") String newPassword);
+
+        @GET("login/changeAppPwd?")
+        Call<LoginStudent> changeStudentPwd(@Query("type") String type,
+                                            @Query("username") String username,
+                                            @Query("oldPassword") String oldPassword,
+                                            @Query("newPassword") String newPassword);
+
+        /**
+         * 师傅订水订单
+         */
+        @GET("waterOrder/getWaterOrderByWorkerId?")
+        Call<WaterOrders> workerGetWaterOrder(@Query("userId") String userId);
+
+        @GET("waterOrder/finishOrder?")
+        Call<SaveWaterOrder> workerFinishWaterOrder(@Query("userId") String userId,
+                                                    @Query("waterOrderId") String waterOrderId);
+
+        /**
+         * 师傅维修订单
+         */
+        @GET("repairOrder/getRepairOrderByWorkerId?")
+        Call<RepairOrders> workerGetRepairOrder(@Query("userId") String userId);
+        @GET("repairOrder/finishOrder?")
+        Call<SaveRepairOrder> workerFinishRepairOrder(@Query("userId") String userId,
+                                                      @Query("repairOrderId") String repairOrderId);
+
     }
 
 }

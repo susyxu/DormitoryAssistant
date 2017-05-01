@@ -5,7 +5,7 @@ package com.susy.dormitoryassistant.entity;
  */
 
 public class WaterOrder {
-    private int waterOrderId;
+    private String waterOrderId;
     private String waterOrderStatus;
     private String waterOrderTime;
     private String userId;
@@ -14,11 +14,11 @@ public class WaterOrder {
     private String waterCount;
     private String dormitoryId;
 
-    public int getWaterOrderId() {
+    public String getWaterOrderId() {
         return waterOrderId;
     }
 
-    public void setWaterOrderId(int waterOrderId) {
+    public void setWaterOrderId(String waterOrderId) {
         this.waterOrderId = waterOrderId;
     }
 

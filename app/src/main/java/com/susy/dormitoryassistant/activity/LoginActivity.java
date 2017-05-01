@@ -29,6 +29,7 @@ import retrofit2.Response;
  */
 public class LoginActivity extends AppCompatActivity {
 
+    private Button btn_test;
     private Button btn_studentLogin;
     private Button btn_adminLogin;
     private Button btn_workerLogin;
@@ -48,6 +49,15 @@ public class LoginActivity extends AppCompatActivity {
         setContentView(R.layout.activity_login);
 
         //测试用的按钮
+        btn_test = (Button) findViewById(R.id.btn_test);
+        btn_test.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View v) {
+                Intent intent = new Intent(LoginActivity.this, TestAcitvity.class);
+                startActivity(intent);
+            }
+        });
+
         btn_studentLogin = (Button) findViewById(R.id.btn_studentLogin);
         btn_studentLogin.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -113,10 +123,10 @@ public class LoginActivity extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 //getStudent();   测试用
-                if(et_username.getText().toString().equals("")){
-                    UtilTools.showToast(LoginActivity.this,"请输入用户名");
-                } else if(et_pwd.getText().toString().equals("")){
-                    UtilTools.showToast(LoginActivity.this,"请输入密码");
+                if (et_username.getText().toString().equals("")) {
+                    UtilTools.showToast(LoginActivity.this, "请输入用户名");
+                } else if (et_pwd.getText().toString().equals("")) {
+                    UtilTools.showToast(LoginActivity.this, "请输入密码");
                 } else {
                     login();
                 }
@@ -135,7 +145,7 @@ public class LoginActivity extends AppCompatActivity {
 
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
 
-        if(type.equals("student")){
+        if (type.equals("student")) {
             Call<LoginStudent> call = apiStores.appStudentLogin(type, username, password);
             call.enqueue(new Callback<LoginStudent>() {
                 @Override
@@ -145,19 +155,18 @@ public class LoginActivity extends AppCompatActivity {
                         LoginStudent globalStudent = response.body();
                         mApplication.setGlobalStudent(globalStudent);
                         startApp(sp_type.getSelectedItem().toString());
-                    }
-                    else {
-                        UtilTools.showToast(LoginActivity.this,response.body().getInfo());
+                    } else {
+                        UtilTools.showToast(LoginActivity.this, response.body().getInfo());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginStudent> call, Throwable t) {
-                    UtilTools.showToast(LoginActivity.this,"学生登陆失败");
+                    UtilTools.showToast(LoginActivity.this, "学生登陆失败");
                 }
             });
         }
-        if(type.equals("user")){
+        if (type.equals("user")) {
             Call<LoginUser> call = apiStores.appUserLogin(type, username, password);
             call.enqueue(new Callback<LoginUser>() {
                 @Override
@@ -167,15 +176,14 @@ public class LoginActivity extends AppCompatActivity {
                         LoginUser globalUser = response.body();
                         mApplication.setGlobalUser(globalUser);
                         startApp(sp_type.getSelectedItem().toString());
-                    }
-                    else {
-                        UtilTools.showToast(LoginActivity.this,response.body().getInfo());
+                    } else {
+                        UtilTools.showToast(LoginActivity.this, response.body().getInfo());
                     }
                 }
 
                 @Override
                 public void onFailure(Call<LoginUser> call, Throwable t) {
-                    UtilTools.showToast(LoginActivity.this,"用户登陆失败");
+                    UtilTools.showToast(LoginActivity.this, "用户登陆失败");
                 }
             });
         }

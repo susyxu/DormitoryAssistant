@@ -18,6 +18,7 @@
 
             <com.facebook.drawee.view.SimpleDraweeView
                 android:id="@+id/imgHead"
+                android:background="#eeeeee"
                 android:layout_width="72dp"
                 android:layout_height="72dp"
                 fresco:actualImageScaleType="fitCenter" />

@@ -1,5 +1,6 @@
 package com.susy.dormitoryassistant.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
@@ -9,6 +10,8 @@ import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.activity.WorkerRepairOrderActivity;
+import com.susy.dormitoryassistant.activity.WorkerWaterOrderActivity;
 
 
 /**
@@ -40,8 +43,12 @@ public class WorkerFunctionFragment extends Fragment implements View.OnClickList
     public void onClick(View view) {
         switch (view.getId()) {
             case R.id.ll_repair:
+                Intent intent2 = new Intent(getActivity(), WorkerRepairOrderActivity.class);
+                startActivity(intent2);
                 break;
             case R.id.ll_water:
+                Intent intent = new Intent(getActivity(), WorkerWaterOrderActivity.class);
+                startActivity(intent);
                 break;
             case R.id.ll_suggest:
                 break;

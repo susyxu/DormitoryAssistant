@@ -5,14 +5,17 @@ import android.support.annotation.Nullable;
 import android.support.v7.app.AppCompatActivity;
 import android.util.Log;
 import android.view.View;
+import android.widget.ArrayAdapter;
+import android.widget.EditText;
 import android.widget.ImageView;
 import android.widget.RadioButton;
 import android.widget.RadioGroup;
+import android.widget.Spinner;
 import android.widget.TextView;
 
 import com.susy.dormitoryassistant.R;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
-import com.susy.dormitoryassistant.entity.SaveWaterOrder;
+import com.susy.dormitoryassistant.entity.SaveRepairOrder;
 import com.susy.dormitoryassistant.http.AppClient;
 import com.susy.dormitoryassistant.utils.UtilTools;
 
@@ -21,11 +24,10 @@ import retrofit2.Callback;
 import retrofit2.Response;
 
 /**
- * 学生订水
- * Created by susy on 17/3/12.
+ * Created by susy on 17/4/26.
  */
 
-public class StudentAddWaterActivity extends AppCompatActivity implements View.OnClickListener {
+public class StudentAddRepairActivity extends AppCompatActivity implements View.OnClickListener{
 
     private DormitoryApplication mApplication = null;
 
@@ -33,34 +35,39 @@ public class StudentAddWaterActivity extends AppCompatActivity implements View.O
     private TextView tv_title;
     private TextView tv_save;
     private TextView tv_dormCode;
-    private TextView tv_money;
+    private Spinner sp_type;
     private RadioGroup rg;
     private RadioButton rb_WaterOne;
     private RadioButton rb_WaterTwo;
+    private RadioButton rb_WaterThree;
+    private EditText et_details;
 
     private String studentId="";
-    private String count="";
+    private String freeTime="";
     private String dormitoryId="";
 
     @Override
     protected void onCreate(@Nullable Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApplication = DormitoryApplication.getmInstance();
-        setContentView(R.layout.activity_add_water);
+        setContentView(R.layout.activity_add_repair);
+
         tv_title = (TextView) findViewById(R.id.tvTitle);
         tv_save = (TextView) findViewById(R.id.tvSave);
         tv_dormCode = (TextView) findViewById(R.id.tv_dormCode);
-        tv_money = (TextView) findViewById(R.id.tv_money);
         iv_back = (ImageView) findViewById(R.id.back);
         rg = (RadioGroup) findViewById(R.id.rg);
         rb_WaterOne = (RadioButton) findViewById(R.id.rbNumOne);
         rb_WaterTwo = (RadioButton) findViewById(R.id.rbNumTwo);
+        rb_WaterThree = (RadioButton) findViewById(R.id.rbNumThree);
+        sp_type = (Spinner) findViewById(R.id.type);
+        et_details = (EditText) findViewById(R.id.et_details);
 
-        tv_title.setText("预定饮用水");
-        tv_save.setText("预定");
-        tv_money.setText("总计金额:   10.00元");
+        tv_title.setText("预约维修");
+        tv_save.setText("预约");
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);
+
 
         if (mApplication.getGlobalStudent() != null) {
             tv_dormCode.setText("寝室号码:   "+mApplication.getGlobalStudent().getData().getDormitoryId());
@@ -68,25 +75,18 @@ public class StudentAddWaterActivity extends AppCompatActivity implements View.O
             dormitoryId=mApplication.getGlobalStudent().getData().getDormitoryId();
         }
 
+        String[] items = getResources().getStringArray(R.array.repairtype);
+        ArrayAdapter<String> adapter = new ArrayAdapter<String>(this, android.R.layout.simple_spinner_item, items);
+        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
+        sp_type.setAdapter(adapter);
 
-        //根据rb选项的check改变textview handler
-        rg.setOnCheckedChangeListener(new RadioGroup.OnCheckedChangeListener() {
-            @Override
-            public void onCheckedChanged(RadioGroup group, int checkedId) {
-                if (checkedId==R.id.rbNumOne){
-                    tv_money.setText("总计金额:   10.00元");
-                } else if(checkedId==R.id.rbNumTwo){
-                    tv_money.setText("总计金额:   20.00元");
-                }
-            }
-        });
     }
 
     @Override
     public void onClick(View v) {
         switch (v.getId()) {
             case R.id.back:
-                StudentAddWaterActivity.this.finish();
+                StudentAddRepairActivity.this.finish();
                 break;
             case R.id.tvSave:
                 save();
@@ -96,28 +96,34 @@ public class StudentAddWaterActivity extends AppCompatActivity implements View.O
 
     private void save() {
         if (rb_WaterOne.isChecked()) {
-            count = "1";
+            freeTime = "早上";
+        } else if (rb_WaterTwo.isChecked()){
+            freeTime = "中午";
         } else {
-            count = "2";
+            freeTime = "下午";
         }
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
-        Call<SaveWaterOrder> call = apiStores.studentAddwater(studentId,count,dormitoryId);
-        call.enqueue(new Callback<SaveWaterOrder>() {
+        Call<SaveRepairOrder> call = apiStores.studentAddRepair(studentId,dormitoryId,
+                String.valueOf(sp_type.getSelectedItemId()+1),
+                et_details.getText().toString(),
+                freeTime);
+        call.enqueue(new Callback<SaveRepairOrder>() {
             @Override
-            public void onResponse(Call<SaveWaterOrder> call, Response<SaveWaterOrder> response) {
-                Log.i("saveAddWater",response.body().getInfo());
+            public void onResponse(Call<SaveRepairOrder> call, Response<SaveRepairOrder> response) {
+                Log.i("saveAddReapir",response.body().getInfo());
                 if(response.body().getInfo().equals("添加成功")){
-                    UtilTools.showToast(StudentAddWaterActivity.this, "预定饮用水成功");
-                    StudentAddWaterActivity.this.finish();
+                    UtilTools.showToast(StudentAddRepairActivity.this, "预约维修成功");
+                    StudentAddRepairActivity.this.finish();
                 } else {
-                    UtilTools.showToast(StudentAddWaterActivity.this, "预定饮用水失败");
+                    UtilTools.showToast(StudentAddRepairActivity.this, "预约维修失败");
                 }
-
             }
+
             @Override
-            public void onFailure(Call<SaveWaterOrder> call, Throwable t) {
-                UtilTools.showToast(StudentAddWaterActivity.this, "预定饮用水失败");
+            public void onFailure(Call<SaveRepairOrder> call, Throwable t) {
+                UtilTools.showToast(StudentAddRepairActivity.this, "预约维修失败");
             }
         });
+
     }
 }

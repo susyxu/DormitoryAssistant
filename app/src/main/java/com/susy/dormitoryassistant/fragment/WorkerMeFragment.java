@@ -1,5 +1,6 @@
 package com.susy.dormitoryassistant.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
@@ -13,6 +14,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.activity.ChangePwdActivity;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 
 
@@ -47,6 +49,7 @@ public class WorkerMeFragment extends Fragment implements View.OnClickListener{
         }
 
         ly_Exit.setOnClickListener(this);
+        ly_ChangePwd.setOnClickListener(this);
         return rootView;
     }
 
@@ -68,6 +71,11 @@ public class WorkerMeFragment extends Fragment implements View.OnClickListener{
                         })
                         .negativeText("取消")
                         .show();
+                break;
+            case R.id.linearChangePwd:
+                Intent intent = new Intent(getActivity(), ChangePwdActivity.class);
+                intent.putExtra("userType","user");
+                startActivity(intent);
                 break;
         }
     }

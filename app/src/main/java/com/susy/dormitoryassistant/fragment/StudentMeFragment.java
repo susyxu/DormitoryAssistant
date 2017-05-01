@@ -1,9 +1,11 @@
 package com.susy.dormitoryassistant.fragment;
 
+import android.content.Intent;
 import android.os.Bundle;
 import android.support.annotation.NonNull;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
+import android.text.InputType;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
@@ -13,6 +15,7 @@ import android.widget.TextView;
 import com.afollestad.materialdialogs.DialogAction;
 import com.afollestad.materialdialogs.MaterialDialog;
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.activity.ChangePwdActivity;
 import com.susy.dormitoryassistant.activity.MainStudentActivity;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.http.AppClient;
@@ -58,6 +61,7 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
 
         ly_Wallet.setOnClickListener(this);
         ly_Exit.setOnClickListener(this);
+        ly_ChangePwd.setOnClickListener(this);
 
         return rootView;
     }
@@ -94,6 +98,11 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
                         .content("可用余额：" + money)
                         .positiveText("确定")
                         .show();
+                break;
+            case R.id.linearChangePwd:
+                Intent intent = new Intent(getActivity(), ChangePwdActivity.class);
+                intent.putExtra("userType","student");
+                startActivity(intent);
                 break;
         }
     }
