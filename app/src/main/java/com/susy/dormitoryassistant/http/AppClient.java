@@ -2,12 +2,16 @@ package com.susy.dormitoryassistant.http;
 
 import android.util.Log;
 
+import com.susy.dormitoryassistant.entity.DisobeyOrders;
+import com.susy.dormitoryassistant.entity.DormStudents;
+import com.susy.dormitoryassistant.entity.Dorms;
 import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
 import com.susy.dormitoryassistant.entity.MilkOrder;
 import com.susy.dormitoryassistant.entity.MilkOrders;
 import com.susy.dormitoryassistant.entity.RepairOrder;
 import com.susy.dormitoryassistant.entity.RepairOrders;
+import com.susy.dormitoryassistant.entity.SaveDisobeyOrder;
 import com.susy.dormitoryassistant.entity.SaveMilkOrder;
 import com.susy.dormitoryassistant.entity.SaveRepairOrder;
 import com.susy.dormitoryassistant.entity.SaveWaterOrder;
@@ -63,8 +67,17 @@ public class AppClient {
     }
 
     public interface ApiStores {
+        /**
+         * 根据学号搜索学生
+         */
         @GET("json/getStudent?")
         Call<Student> getStudent(@Query("studentId") String studentId);
+
+        /**
+         * 根据寝室搜索学生们
+         */
+        @GET("dormitory/getDormitoryById?")
+        Call<DormStudents> getStudentsByDormCode(@Query("dormitoryId") String dormitoryId);
 
         /**
          * 用户登入
@@ -149,6 +162,24 @@ public class AppClient {
         @GET("repairOrder/finishOrder?")
         Call<SaveRepairOrder> workerFinishRepairOrder(@Query("userId") String userId,
                                                       @Query("repairOrderId") String repairOrderId);
+
+        /**
+         * 获取管理寝室列表
+         */
+        @GET("dormitory/getAdminDorms?")
+        Call<Dorms> adminGetDormList(@Query("userId") String userId);
+
+        /**
+         * 违规记录
+         */
+        @GET("disobedientRule/add?")
+        Call<SaveDisobeyOrder> addDisobeyOrders(@Query("studentId") String studentId,
+                                                @Query("ruleId") String ruleId,
+                                                @Query("userId") String userId,
+                                                @Query("detail") String detail);
+        @GET("disobedientRule/getByStudentId?")
+        Call<DisobeyOrders> getDisobeyOrders(@Query("studentId") String studentId);
+
 
     }
 

@@ -31,6 +31,7 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
     private LinearLayout ly_Wallet;
     private LinearLayout ly_Cost;
     private LinearLayout ly_Score;
+    private LinearLayout ly_Disobey;
     private LinearLayout ly_Contact;
     private LinearLayout ly_ChangePwd;
     private LinearLayout ly_Exit;
@@ -49,6 +50,7 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
         ly_Wallet = (LinearLayout) rootView.findViewById(R.id.linearMyWallet);
         ly_Cost = (LinearLayout) rootView.findViewById(R.id.linearMyCost);
         ly_Score = (LinearLayout) rootView.findViewById(R.id.linearMyScore);
+        ly_Disobey = (LinearLayout) rootView.findViewById(R.id.linearMyDisobey);
         ly_Contact = (LinearLayout) rootView.findViewById(R.id.linearMyContact);
         ly_ChangePwd = (LinearLayout) rootView.findViewById(R.id.linearChangePwd);
         ly_Exit = (LinearLayout) rootView.findViewById(R.id.linearExit);

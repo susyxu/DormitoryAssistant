@@ -20,5 +20,5 @@
         android:gravity="center"
         android:text="344"
         android:textColor="#ffffff"
-        android:textSize="@dimen/BigTextSize" />
+        android:textSize="@dimen/SmallTextSize" />
 </FrameLayout>

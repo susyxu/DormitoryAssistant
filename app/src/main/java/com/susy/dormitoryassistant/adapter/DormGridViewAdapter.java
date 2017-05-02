@@ -66,7 +66,6 @@ public class DormGridViewAdapter extends BaseAdapter {
 
         //和数据进行绑定
         myViewHolder.text.setText(mDormList.get(position).toString());
-        //myViewHolder.image.setImageResource(R.mipmap.ic_launcher);
 
         return convertView;
     }
