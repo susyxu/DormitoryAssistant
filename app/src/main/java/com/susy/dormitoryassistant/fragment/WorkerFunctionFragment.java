@@ -9,6 +9,7 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.LinearLayout;
 
+import com.afollestad.materialdialogs.MaterialDialog;
 import com.susy.dormitoryassistant.R;
 import com.susy.dormitoryassistant.activity.WorkerRepairOrderActivity;
 import com.susy.dormitoryassistant.activity.WorkerWaterOrderActivity;
@@ -51,6 +52,16 @@ public class WorkerFunctionFragment extends Fragment implements View.OnClickList
                 startActivity(intent);
                 break;
             case R.id.ll_suggest:
+                new MaterialDialog.Builder(getActivity())
+                        .title("意见反馈")
+                        .positiveText("提交")
+                        .inputRangeRes(5, 20, R.color.colorAccent)
+                        .input(null, null, new MaterialDialog.InputCallback() {
+                            @Override
+                            public void onInput(MaterialDialog dialog, CharSequence input) {
+                                // Do something
+                            }
+                        }).show();
                 break;
         }
     }

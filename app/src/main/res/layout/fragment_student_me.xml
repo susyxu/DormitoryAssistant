@@ -164,7 +164,7 @@
                     android:layout_width="wrap_content"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="16dp"
-                    android:text="我的寝室违规"
+                    android:text="我的违规记录"
                     android:textSize="@dimen/SmallTextSize" />
             </LinearLayout>
 

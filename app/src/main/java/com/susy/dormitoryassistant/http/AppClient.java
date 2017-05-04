@@ -2,6 +2,7 @@ package com.susy.dormitoryassistant.http;
 
 import android.util.Log;
 
+import com.susy.dormitoryassistant.entity.Costs;
 import com.susy.dormitoryassistant.entity.DisobeyOrders;
 import com.susy.dormitoryassistant.entity.DormStudents;
 import com.susy.dormitoryassistant.entity.Dorms;
@@ -180,6 +181,11 @@ public class AppClient {
         @GET("disobedientRule/getByStudentId?")
         Call<DisobeyOrders> getDisobeyOrders(@Query("studentId") String studentId);
 
+        /**
+         * 水电费
+         */
+        @GET("dormitory/{dormitoryId}/record")
+        Call<Costs> getDormCost(@Path("dormitoryId") String dormitoryId);
 
     }
 

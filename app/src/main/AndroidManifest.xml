@@ -3,6 +3,7 @@
     package="com.susy.dormitoryassistant">
 
     <uses-permission android:name="android.permission.INTERNET" />
+    <uses-permission android:name="android.permission.CALL_PHONE" />
 
     <application
         android:name=".app.DormitoryApplication"
@@ -109,6 +110,22 @@
 
         <activity
             android:name=".activity.AdminAddDisobeyActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+
+        <activity
+            android:name=".activity.StudentDisobeyActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+
+        <activity
+            android:name=".activity.StudentCostActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
