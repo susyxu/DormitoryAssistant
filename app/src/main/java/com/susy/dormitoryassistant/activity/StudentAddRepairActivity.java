@@ -104,7 +104,7 @@ public class StudentAddRepairActivity extends AppCompatActivity implements View.
         }
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
         Call<SaveRepairOrder> call = apiStores.studentAddRepair(studentId,dormitoryId,
-                String.valueOf(sp_type.getSelectedItemId()+1),
+                String.valueOf(sp_type.getSelectedItemPosition()+1),
                 et_details.getText().toString(),
                 freeTime);
         call.enqueue(new Callback<SaveRepairOrder>() {

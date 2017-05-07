@@ -30,18 +30,18 @@
     </string-array>
 
     <string-array name="repairtype">
-        <item>xxx</item>
-        <item>yyy</item>
-        <item>zzz</item>
-        <item>aaa</item>
-        <item>bbb</item>
+        <item>维修类型1</item>
+        <item>维修类型2</item>
+        <item>维修类型3</item>
+        <item>维修类型4</item>
+        <item>维修类型5</item>
     </string-array>
 
     <string-array name="disobeytype">
-        <item>1</item>
-        <item>2</item>
-        <item>3</item>
-        <item>4</item>
-        <item>5</item>
+        <item>违规类型1</item>
+        <item>违规类型2</item>
+        <item>违规类型3</item>
+        <item>违规类型4</item>
+        <item>违规类型5</item>
     </string-array>
 </resources>

@@ -2,7 +2,6 @@ package com.susy.dormitoryassistant.fragment;
 
 import android.graphics.Color;
 import android.os.Bundle;
-import android.provider.Settings;
 import android.support.annotation.Nullable;
 import android.support.v4.app.Fragment;
 import android.util.Log;
@@ -17,9 +16,14 @@ import android.widget.RadioGroup;
 import android.widget.TextView;
 
 import com.susy.dormitoryassistant.R;
+import com.susy.dormitoryassistant.entity.Notices;
 import com.susy.dormitoryassistant.entity.WeatherJson;
+import com.susy.dormitoryassistant.http.AppClient;
 import com.susy.dormitoryassistant.http.WeatherClient;
 import com.susy.dormitoryassistant.utils.UtilTools;
+
+import java.util.ArrayList;
+import java.util.List;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -34,6 +38,8 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
 
     private TextView tv_weather;
     private TextView tv_date;
+    private TextView tv_Notice1;
+    private TextView tv_Notice2;
 
     private RadioGroup rg_info;
     private RadioButton rb_dormInfo;
@@ -47,12 +53,16 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
 
     int width = 0;
 
+    private List<String> infos = new ArrayList<>();
+
     @Nullable
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View rootView = inflater.inflate(R.layout.fragment_student_news, container, false);
         rg_info = (RadioGroup) rootView.findViewById(R.id.rg_info);
         rg_info2 = (RadioGroup) rootView.findViewById(R.id.rg_info2);
+        tv_Notice1 = (TextView) rootView.findViewById(R.id.tvNotice1);
+        tv_Notice2 = (TextView) rootView.findViewById(R.id.tvNotice2);
 
         WindowManager m = getActivity().getWindowManager();
         Display d = m.getDefaultDisplay();  //为获取屏幕的宽、高
@@ -63,6 +73,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
         tv_weather = (TextView) rootView.findViewById(R.id.tv_weather);
         tv_date = (TextView) rootView.findViewById(R.id.tv_date);
         getWeather();
+        getInfos();
         tv_date.setText(UtilTools.getCurrentTime_ch());
         return rootView;
     }
@@ -165,6 +176,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_waterInfo.setTextColor(Color.parseColor("#000000"));
                 rb_lightInfo.setChecked(false);
                 rb_lightInfo.setTextColor(Color.parseColor("#000000"));
+                tv_Notice1.setText(infos.get(0));
                 break;
             case 1: //停水公告
                 rb_dormInfo.setChecked(false);
@@ -173,6 +185,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_waterInfo.setTextColor(Color.parseColor("#00B7F3"));
                 rb_lightInfo.setChecked(false);
                 rb_lightInfo.setTextColor(Color.parseColor("#000000"));
+                tv_Notice1.setText(infos.get(1));
                 break;
             case 2: //熄灯公告
                 rb_dormInfo.setChecked(false);
@@ -181,6 +194,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_waterInfo.setTextColor(Color.parseColor("#000000"));
                 rb_lightInfo.setChecked(true);
                 rb_lightInfo.setTextColor(Color.parseColor("#00B7F3"));
+                tv_Notice1.setText(infos.get(2));
                 break;
             case 3: //寝室红榜
                 rb_red.setChecked(true);
@@ -189,6 +203,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_black.setTextColor(Color.parseColor("#000000"));
                 rb_bad.setChecked(false);
                 rb_bad.setTextColor(Color.parseColor("#000000"));
+                tv_Notice2.setText(infos.get(3));
                 break;
             case 4: //寝室黑榜
                 rb_red.setChecked(false);
@@ -197,6 +212,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_black.setTextColor(Color.parseColor("#00B7F3"));
                 rb_bad.setChecked(false);
                 rb_bad.setTextColor(Color.parseColor("#000000"));
+                tv_Notice2.setText(infos.get(4));
                 break;
             case 5: //通报批评
                 rb_red.setChecked(false);
@@ -205,6 +221,7 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
                 rb_black.setTextColor(Color.parseColor("#000000"));
                 rb_bad.setChecked(true);
                 rb_bad.setTextColor(Color.parseColor("#00B7F3"));
+                tv_Notice2.setText(infos.get(5));
                 break;
         }
     }
@@ -234,6 +251,26 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
      * 获取公告中的6个信息
      */
     private void getInfos(){
+        infos.clear();
+        AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
+        Call<Notices> call = apiStores.getNotices();
+        call.enqueue(new Callback<Notices>() {
+            @Override
+            public void onResponse(Call<Notices> call, Response<Notices> response) {
+                infos.add(response.body().getData().getNotice().get("寝室公告"));
+                infos.add(response.body().getData().getNotice().get("停水公告"));
+                infos.add(response.body().getData().getNotice().get("停电公告"));
+                infos.add(response.body().getData().getNotice().get("寝室红榜"));
+                infos.add(response.body().getData().getNotice().get("寝室黑榜"));
+                infos.add(response.body().getData().getNotice().get("通报批评"));
+                tv_Notice1.setText(infos.get(0));
+                tv_Notice2.setText(infos.get(3));
+            }
 
+            @Override
+            public void onFailure(Call<Notices> call, Throwable t) {
+
+            }
+        });
     }
 }

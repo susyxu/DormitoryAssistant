@@ -91,12 +91,12 @@ public class AdminAddDisobeyActivity extends AppCompatActivity implements View.O
 
     private void save() {
         AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
-        Call<SaveDisobeyOrder> call = apiStores.addDisobeyOrders(studentId, sp_type.getSelectedItem().toString(),
+        Call<SaveDisobeyOrder> call = apiStores.addDisobeyOrders(studentId, String.valueOf(sp_type.getSelectedItemPosition() + 1),
                 userId, et_details.getText().toString());
         call.enqueue(new Callback<SaveDisobeyOrder>() {
             @Override
             public void onResponse(Call<SaveDisobeyOrder> call, Response<SaveDisobeyOrder> response) {
-                if (response.body().getInfo().equals("添加成功")){
+                if (response.body().getInfo().equals("添加成功")) {
                     UtilTools.showToast(AdminAddDisobeyActivity.this, "添加违规成功");
                     AdminAddDisobeyActivity.this.finish();
                 } else {

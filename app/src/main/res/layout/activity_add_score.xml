@@ -1,5 +1,6 @@
 <?xml version="1.0" encoding="utf-8"?>
 <LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
     android:background="#ffffff"
@@ -28,23 +29,14 @@
                 android:orientation="horizontal">
 
                 <TextView
+                    android:id="@+id/tv_dormCode"
                     android:layout_width="wrap_content"
                     android:layout_height="match_parent"
                     android:gravity="center_vertical"
-                    android:text="原密码: "
+                    android:text="寝室号码: "
                     android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/SmallTextSize" />
 
-                <EditText
-                    android:id="@+id/et_oldpwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="10dp"
-                    android:background="@drawable/edittext_border"
-                    android:hint="请输入原密码"
-                    android:inputType="textPassword"
-                    android:padding="8dp"
-                    android:textSize="@dimen/SmallTextSize" />
 
             </LinearLayout>
 
@@ -54,26 +46,26 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="新密码: "
+                    android:text="床铺卫生: "
                     android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/SmallTextSize" />
 
-                <EditText
-                    android:id="@+id/et_newPwd"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/bedClean"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/edittext_border"
-                    android:hint="请输入新密码"
-                    android:inputType="textPassword"
-                    android:padding="8dp"
-                    android:textSize="@dimen/SmallTextSize" />
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="24dp"
+                    app:srb_stepSize="1" />
 
             </LinearLayout>
 
@@ -83,26 +75,113 @@
                 android:layout_gravity="center_horizontal"
                 android:layout_marginBottom="8dp"
                 android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
                 android:orientation="horizontal">
 
                 <TextView
                     android:layout_width="wrap_content"
-                    android:layout_height="match_parent"
+                    android:layout_height="wrap_content"
                     android:gravity="center_vertical"
-                    android:text="新密码: "
+                    android:text="地面卫生: "
                     android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/SmallTextSize" />
 
-                <EditText
-                    android:id="@+id/et_newPwd2"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/floorClean"
                     android:layout_marginLeft="10dp"
-                    android:background="@drawable/edittext_border"
-                    android:hint="请再次输入新密码"
-                    android:inputType="textPassword"
-                    android:padding="8dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="24dp"
+                    app:srb_stepSize="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="桌面卫生: "
+                    android:textColor="@color/colorTextBlack"
                     android:textSize="@dimen/SmallTextSize" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/deskClean"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="24dp"
+                    app:srb_stepSize="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="厕所卫生: "
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/SmallTextSize" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/wcClean"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="24dp"
+                    app:srb_stepSize="1" />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_gravity="center_horizontal"
+                android:layout_marginBottom="8dp"
+                android:layout_marginTop="8dp"
+                android:gravity="center_vertical"
+                android:orientation="horizontal">
+
+                <TextView
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:gravity="center_vertical"
+                    android:text="阳台卫生: "
+                    android:textColor="@color/colorTextBlack"
+                    android:textSize="@dimen/SmallTextSize" />
+
+                <com.iarcuschin.simpleratingbar.SimpleRatingBar
+                    android:id="@+id/balconyClean"
+                    android:layout_marginLeft="10dp"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    app:srb_numberOfStars="5"
+                    app:srb_rating="5"
+                    app:srb_starSize="24dp"
+                    app:srb_stepSize="1" />
 
             </LinearLayout>
 

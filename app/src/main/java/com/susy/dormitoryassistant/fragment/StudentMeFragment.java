@@ -20,6 +20,7 @@ import com.susy.dormitoryassistant.activity.ChangePwdActivity;
 import com.susy.dormitoryassistant.activity.MainStudentActivity;
 import com.susy.dormitoryassistant.activity.StudentCostActivity;
 import com.susy.dormitoryassistant.activity.StudentDisobeyActivity;
+import com.susy.dormitoryassistant.activity.StudentScoreActivity;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.http.AppClient;
 
@@ -70,6 +71,7 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
         ly_Disobey.setOnClickListener(this);
         ly_Contact.setOnClickListener(this);
         ly_Cost.setOnClickListener(this);
+        ly_Score.setOnClickListener(this);
 
         return rootView;
     }
@@ -166,6 +168,10 @@ public class StudentMeFragment extends Fragment implements View.OnClickListener 
             case R.id.linearMyCost:
                 Intent intent3 = new Intent(getActivity(), StudentCostActivity.class);
                 startActivity(intent3);
+                break;
+            case R.id.linearMyScore:
+                Intent intent4 = new Intent(getActivity(), StudentScoreActivity.class);
+                startActivity(intent4);
                 break;
         }
     }

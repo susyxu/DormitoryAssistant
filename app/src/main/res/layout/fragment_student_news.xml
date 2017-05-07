@@ -54,13 +54,14 @@
                 android:background="#eeeeee" />
 
             <TextView
+                android:id="@+id/tvNotice1"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="4"
                 android:minLines="4"
                 android:padding="8dp"
                 android:textSize="@dimen/SmallerTextSize"
-                android:text="暂无通知" />
+                android:text="暂无最新消息" />
 
             <View
                 android:layout_width="match_parent"
@@ -100,13 +101,14 @@
                 android:background="#eeeeee" />
 
             <TextView
+                android:id="@+id/tvNotice2"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:maxLines="4"
                 android:minLines="4"
                 android:padding="8dp"
                 android:textSize="@dimen/SmallerTextSize"
-                android:text="暂无通知" />
+                android:text="暂无最新消息" />
 
             <View
                 android:layout_width="match_parent"

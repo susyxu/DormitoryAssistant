@@ -94,14 +94,14 @@
         </activity>
 
         <activity
-            android:name=".activity.WorkerAddCostActivity"
+            android:name=".activity.AdminAddCostActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
 
         </activity>
         <activity
-            android:name=".activity.WorkerAddScoreActivity"
+            android:name=".activity.AdminAddScoreActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">
@@ -126,6 +126,14 @@
 
         <activity
             android:name=".activity.StudentCostActivity"
+            android:launchMode="singleTask"
+            android:screenOrientation="portrait"
+            android:windowSoftInputMode="stateHidden">
+
+        </activity>
+
+        <activity
+            android:name=".activity.StudentScoreActivity"
             android:launchMode="singleTask"
             android:screenOrientation="portrait"
             android:windowSoftInputMode="stateHidden">

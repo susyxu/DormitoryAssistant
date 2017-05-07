@@ -72,6 +72,7 @@ public class RepairOrderAdapter extends BaseAdapter {
 
         if(mOrderList.get(position).getRepairOrderFinishTime()==null){
             myViewHolder.tvFinished.setText("待维修");
+            myViewHolder.tvFinishedTime.setText("- -");
         } else {
             myViewHolder.tvFinished.setText("已维修");
             myViewHolder.tvFinishedTime.setText(mOrderList.get(position).getRepairOrderFinishTime());

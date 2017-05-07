@@ -11,8 +11,7 @@ import android.widget.AdapterView;
 import android.widget.GridView;
 
 import com.susy.dormitoryassistant.R;
-import com.susy.dormitoryassistant.activity.ChangePwdActivity;
-import com.susy.dormitoryassistant.activity.WorkerAddScoreActivity;
+import com.susy.dormitoryassistant.activity.AdminAddScoreActivity;
 import com.susy.dormitoryassistant.adapter.DormGridViewAdapter;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.entity.Dorms;
@@ -57,7 +56,7 @@ public class AdminScoreFragment extends Fragment implements View.OnClickListener
         gv_dormList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), WorkerAddScoreActivity.class);
+                Intent intent = new Intent(getActivity(), AdminAddScoreActivity.class);
                 intent.putExtra("dormitoryId",dormList.get(position));
                 startActivity(intent);
             }

@@ -70,6 +70,7 @@ public class WaterOrderAdapter extends BaseAdapter {
         myViewHolder.tvTime.setText(mWaterOrderList.get(position).getWaterOrderTime());
         if (mWaterOrderList.get(position).getWaterOrderFinishTime()==null) {
             myViewHolder.tvSent.setText("待配送");
+            myViewHolder.tvSentTime.setText("- -");
         } else {
             myViewHolder.tvSent.setText("已送达");
             myViewHolder.tvSentTime.setText(mWaterOrderList.get(position).getWaterOrderFinishTime());

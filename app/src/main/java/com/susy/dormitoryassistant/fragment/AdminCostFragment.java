@@ -9,22 +9,18 @@ import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.GridView;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.susy.dormitoryassistant.R;
-import com.susy.dormitoryassistant.activity.ChangePwdActivity;
-import com.susy.dormitoryassistant.activity.WorkerAddCostActivity;
-import com.susy.dormitoryassistant.activity.WorkerWaterOrderActivity;
+import com.susy.dormitoryassistant.activity.AdminAddCostActivity;
 import com.susy.dormitoryassistant.adapter.DormGridViewAdapter;
 import com.susy.dormitoryassistant.app.DormitoryApplication;
 import com.susy.dormitoryassistant.entity.Dorms;
-import com.susy.dormitoryassistant.entity.SaveRepairOrder;
 import com.susy.dormitoryassistant.http.AppClient;
-import com.susy.dormitoryassistant.utils.UtilTools;
 
 import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Set;
 
 import retrofit2.Call;
 import retrofit2.Callback;
@@ -49,6 +45,7 @@ public class AdminCostFragment extends Fragment implements View.OnClickListener 
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         mApplication = DormitoryApplication.getmInstance();
         View rootView = inflater.inflate(R.layout.fragment_admin_cost, container, false);
+
         gv_dormList = (GridView) rootView.findViewById(R.id.gv_dormList);
 
         if (mApplication.getGlobalUser() != null) {
@@ -61,7 +58,7 @@ public class AdminCostFragment extends Fragment implements View.OnClickListener 
         gv_dormList.setOnItemClickListener(new AdapterView.OnItemClickListener() {
             @Override
             public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
-                Intent intent = new Intent(getActivity(), WorkerAddCostActivity.class);
+                Intent intent = new Intent(getActivity(), AdminAddCostActivity.class);
                 intent.putExtra("dormitoryId",dormList.get(position));
                 startActivity(intent);
             }

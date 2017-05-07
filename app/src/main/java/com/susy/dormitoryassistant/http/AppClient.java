@@ -10,13 +10,19 @@ import com.susy.dormitoryassistant.entity.LoginStudent;
 import com.susy.dormitoryassistant.entity.LoginUser;
 import com.susy.dormitoryassistant.entity.MilkOrder;
 import com.susy.dormitoryassistant.entity.MilkOrders;
+import com.susy.dormitoryassistant.entity.Notices;
 import com.susy.dormitoryassistant.entity.RepairOrder;
 import com.susy.dormitoryassistant.entity.RepairOrders;
+import com.susy.dormitoryassistant.entity.SaveCost;
 import com.susy.dormitoryassistant.entity.SaveDisobeyOrder;
 import com.susy.dormitoryassistant.entity.SaveMilkOrder;
 import com.susy.dormitoryassistant.entity.SaveRepairOrder;
+import com.susy.dormitoryassistant.entity.SaveScore;
 import com.susy.dormitoryassistant.entity.SaveWaterOrder;
+import com.susy.dormitoryassistant.entity.Scores;
 import com.susy.dormitoryassistant.entity.Student;
+import com.susy.dormitoryassistant.entity.ThisQBill;
+import com.susy.dormitoryassistant.entity.ThisQBillWithInfo;
 import com.susy.dormitoryassistant.entity.WaterOrder;
 import com.susy.dormitoryassistant.entity.WaterOrders;
 
@@ -160,6 +166,7 @@ public class AppClient {
          */
         @GET("repairOrder/getRepairOrderByWorkerId?")
         Call<RepairOrders> workerGetRepairOrder(@Query("userId") String userId);
+
         @GET("repairOrder/finishOrder?")
         Call<SaveRepairOrder> workerFinishRepairOrder(@Query("userId") String userId,
                                                       @Query("repairOrderId") String repairOrderId);
@@ -178,6 +185,7 @@ public class AppClient {
                                                 @Query("ruleId") String ruleId,
                                                 @Query("userId") String userId,
                                                 @Query("detail") String detail);
+
         @GET("disobedientRule/getByStudentId?")
         Call<DisobeyOrders> getDisobeyOrders(@Query("studentId") String studentId);
 
@@ -186,6 +194,43 @@ public class AppClient {
          */
         @GET("dormitory/{dormitoryId}/record")
         Call<Costs> getDormCost(@Path("dormitoryId") String dormitoryId);
+
+        @GET("dormitory/{dormitoryId}/record/{quarter}")
+        Call<Costs> getDormCostByQ(@Path("dormitoryId") String dormitoryId, @Path("quarter") String quarter);
+
+        @GET("record/addRecord?")
+        Call<SaveCost> addDormCost(@Query("userId") String userId,
+                                   @Query("dormitoryId") String dormitoryId,
+                                   @Query("waterCount") String waterCount,
+                                   @Query("elecCount") String elecCount);
+
+        @GET("dormitory/{dormitoryId}/bill/{quarter}")
+        Call<ThisQBillWithInfo> getDormCostBill(@Path("dormitoryId") String dormitoryId, @Path("quarter") String quarter);
+
+        /**
+         * 获取新闻
+         */
+        @GET("notice/latestNotice")
+        Call<Notices> getNotices();
+
+
+        /**
+         * 寝室打分
+         */
+        @GET("{dormitoryId}/grade")
+        Call<Scores> getDormScore(@Path("dormitoryId") String dormitoryId);
+
+        @GET("grade/{week}")
+        Call<Scores> getAllDormScoreByWeek(@Path("week") String week);
+
+        @GET("grade/addGrade?")
+        Call<SaveScore> addDormScore(@Query("userId") String userId,
+                                     @Query("dormitoryId") String dormitoryId,
+                                     @Query("bedClean") String bedClean,
+                                     @Query("floorClean") String floorClean,
+                                     @Query("deskClean") String deskClean,
+                                     @Query("wcClean") String wcClean,
+                                     @Query("balconyClean") String balconyClean);
 
     }
 
