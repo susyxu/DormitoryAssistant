@@ -141,13 +141,6 @@
         </activity>
 
         <!--等待删除-->
-        <activity
-            android:name=".activity.TestAcitvity"
-            android:launchMode="singleTask"
-            android:screenOrientation="portrait"
-            android:windowSoftInputMode="stateHidden">
-
-        </activity>
 
     </application>
 

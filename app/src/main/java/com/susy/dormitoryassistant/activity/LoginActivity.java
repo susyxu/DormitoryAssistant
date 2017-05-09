@@ -29,11 +29,6 @@ import retrofit2.Response;
  */
 public class LoginActivity extends AppCompatActivity {
 
-    private Button btn_test;
-    private Button btn_studentLogin;
-    private Button btn_adminLogin;
-    private Button btn_workerLogin;
-
     private Spinner sp_type;
     private EditText et_username;
     private EditText et_pwd;
@@ -46,48 +41,7 @@ public class LoginActivity extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         mApplication = DormitoryApplication.getmInstance();
-        setContentView(R.layout.activity_login);
-
-        //测试用的按钮
-        btn_test = (Button) findViewById(R.id.btn_test);
-        btn_test.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, TestAcitvity.class);
-                startActivity(intent);
-            }
-        });
-
-        btn_studentLogin = (Button) findViewById(R.id.btn_studentLogin);
-        btn_studentLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainStudentActivity.class);
-                startActivity(intent);
-                //LoginActivity.this.finish();
-            }
-        });
-
-        btn_adminLogin = (Button) findViewById(R.id.btn_adminLogin);
-        btn_adminLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainAdminActivity.class);
-                startActivity(intent);
-                //LoginActivity.this.finish();
-            }
-        });
-
-        btn_workerLogin = (Button) findViewById(R.id.btn_workerLogin);
-        btn_workerLogin.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View v) {
-                Intent intent = new Intent(LoginActivity.this, MainWorkerActivity.class);
-                startActivity(intent);
-                //LoginActivity.this.finish();
-            }
-        });
-
+        setContentView(R.layout.activity_login2);
 
         //正式代码
         sp_type = (Spinner) findViewById(R.id.sp_type);
@@ -208,22 +162,5 @@ public class LoginActivity extends AppCompatActivity {
             startActivity(intent);
             LoginActivity.this.finish();
         }
-    }
-
-
-    //测试用
-    private void getStudent() {
-        AppClient.ApiStores apiStores = AppClient.retrofit().create(AppClient.ApiStores.class);
-        Call<Student> call = apiStores.getStudent("31301215");
-        call.enqueue(new Callback<Student>() {
-            @Override
-            public void onResponse(Call<Student> call, Response<Student> response) {
-                Log.i("student", "getStudent=" + response.body().getStudentName());
-            }
-
-            @Override
-            public void onFailure(Call<Student> call, Throwable t) {
-            }
-        });
     }
 }

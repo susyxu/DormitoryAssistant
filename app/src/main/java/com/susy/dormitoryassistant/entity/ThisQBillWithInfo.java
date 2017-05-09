@@ -8,7 +8,7 @@ import java.util.List;
 
 public class ThisQBillWithInfo {
     private String info;
-    private List<ThisQBill> data;
+    private ThisQBill data;
 
     public String getInfo() {
         return info;
@@ -18,11 +18,11 @@ public class ThisQBillWithInfo {
         this.info = info;
     }
 
-    public List<ThisQBill> getData() {
+    public ThisQBill getData() {
         return data;
     }
 
-    public void setData(List<ThisQBill> data) {
+    public void setData(ThisQBill data) {
         this.data = data;
     }
 }

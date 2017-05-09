@@ -71,7 +71,7 @@ public class AdminAddScoreActivity extends AppCompatActivity implements View.OnC
         tv_save = (TextView) findViewById(R.id.tvSave);
         iv_back = (ImageView) findViewById(R.id.back);
         tv_title.setText("添加寝室评分");
-        tv_save.setText("添加");
+        tv_save.setText("评分");
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);
 

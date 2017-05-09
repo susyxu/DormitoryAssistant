@@ -18,6 +18,7 @@ import android.widget.TextView;
 import com.susy.dormitoryassistant.R;
 import com.susy.dormitoryassistant.entity.Notices;
 import com.susy.dormitoryassistant.entity.WeatherJson;
+import com.susy.dormitoryassistant.entity.weather.WeatherRoot;
 import com.susy.dormitoryassistant.http.AppClient;
 import com.susy.dormitoryassistant.http.WeatherClient;
 import com.susy.dormitoryassistant.utils.UtilTools;
@@ -227,21 +228,21 @@ public class StudentNewsFragment extends Fragment implements View.OnClickListene
     }
 
     /**
-     * 获取天气的信息 数据来源：http://www.weather.com.cn/data/cityinfo/101210101.html
+     * 获取天气的信息 数据来源：http://wthrcdn.etouch.cn/weather_mini?city=杭州
      */
     private void getWeather() {
         WeatherClient.ApiStores apiStores = WeatherClient.retrofit().create(WeatherClient.ApiStores.class);
-        Call<WeatherJson> call = apiStores.getWeather("101210101");
-        call.enqueue(new Callback<WeatherJson>() {
+        Call<WeatherRoot> call = apiStores.getWeather("杭州");
+        call.enqueue(new Callback<WeatherRoot>() {
             @Override
-            public void onResponse(Call<WeatherJson> call, Response<WeatherJson> response) {
-                tv_weather.setText(response.body().getWeatherinfo().getWeather()+" | "
-                        +response.body().getWeatherinfo().getTemp1()+"/"
-                        +response.body().getWeatherinfo().getTemp2());
+            public void onResponse(Call<WeatherRoot> call, Response<WeatherRoot> response) {
+                tv_weather.setText(response.body().getData().getForecast().get(0).getType()+" | "
+                        +response.body().getData().getForecast().get(0).getLow()+"/"
+                        +response.body().getData().getForecast().get(0).getHigh());
             }
 
             @Override
-            public void onFailure(Call<WeatherJson> call, Throwable t) {
+            public void onFailure(Call<WeatherRoot> call, Throwable t) {
 
             }
         });

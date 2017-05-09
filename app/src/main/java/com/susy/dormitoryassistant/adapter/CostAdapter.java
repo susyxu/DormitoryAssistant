@@ -56,7 +56,7 @@ public class CostAdapter extends BaseAdapter {
             myViewHolder.tvQuarter = (TextView) convertView.findViewById(R.id.tvQuarter);
             myViewHolder.tvWater = (TextView) convertView.findViewById(R.id.tvWaterCount);
             myViewHolder.tvElec = (TextView) convertView.findViewById(R.id.tvElecCount);
-            myViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tvMoney);
+//            myViewHolder.tvMoney = (TextView) convertView.findViewById(R.id.tvMoney);
 
             convertView.setTag(myViewHolder);
         } else {
@@ -65,18 +65,18 @@ public class CostAdapter extends BaseAdapter {
 
         //和数据进行绑定
         myViewHolder.tvDormCode.setText(mOrderList.get(position).getDormitoryId());
-        myViewHolder.tvQuarter.setText(mOrderList.get(position).getQuarter());
+        myViewHolder.tvQuarter.setText(mOrderList.get(position).getQuarter()+"季度");
         myViewHolder.tvWater.setText(mOrderList.get(position).getWaterCount()
-                + "（" + mOrderList.get(position).getCurrentWaterPrice() + "元）");
+                + "（度）");
         myViewHolder.tvElec.setText(mOrderList.get(position).getElecCount()
-                + "（" + mOrderList.get(position).getCurrentElecPrice() + "元）");
+                + "（度）");
 
-        Double water = Double.parseDouble(mOrderList.get(position).getCurrentWaterPrice());
-        Double elec = Double.parseDouble(mOrderList.get(position).getCurrentElecPrice());
-        Double sum = water + elec;
-        DecimalFormat df = new DecimalFormat("######0.00");
-
-        myViewHolder.tvMoney.setText(df.format(sum) + "元");
+//        Double water = Double.parseDouble(mOrderList.get(position).getCurrentWaterPrice());
+//        Double elec = Double.parseDouble(mOrderList.get(position).getCurrentElecPrice());
+//        Double sum = water + elec;
+//        DecimalFormat df = new DecimalFormat("######0.00");
+//
+//        myViewHolder.tvMoney.setText(df.format(sum) + "元");
 
         return convertView;
     }
@@ -86,7 +86,7 @@ public class CostAdapter extends BaseAdapter {
         TextView tvQuarter;
         TextView tvWater;
         TextView tvElec;
-        TextView tvMoney;
+//        TextView tvMoney;
     }
 
     /*刷新数据的方法*/

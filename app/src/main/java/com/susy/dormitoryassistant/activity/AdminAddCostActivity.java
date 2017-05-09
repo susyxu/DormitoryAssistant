@@ -62,7 +62,7 @@ public class AdminAddCostActivity extends AppCompatActivity implements View.OnCl
         et_elec = (EditText) findViewById(R.id.et_elec);
 
         tv_title.setText("添加水电费");
-        tv_save.setText("添加");
+        tv_save.setText("提交");
         tv_save.setOnClickListener(this);
         iv_back.setOnClickListener(this);
 

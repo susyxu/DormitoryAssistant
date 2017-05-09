@@ -3,6 +3,7 @@ package com.susy.dormitoryassistant.http;
 import android.util.Log;
 
 import com.susy.dormitoryassistant.entity.WeatherJson;
+import com.susy.dormitoryassistant.entity.weather.WeatherRoot;
 
 import okhttp3.OkHttpClient;
 import okhttp3.logging.HttpLoggingInterceptor;
@@ -21,7 +22,7 @@ public class WeatherClient {
     public static Retrofit retrofit() {
         if (mRetrofit == null) {
             mRetrofit = new Retrofit.Builder()
-                    .baseUrl("http://www.weather.com.cn/")
+                    .baseUrl("http://wthrcdn.etouch.cn/")
                     .addConverterFactory(GsonConverterFactory.create())
                     .client(getOkHttpClient())
                     .build();
@@ -51,12 +52,12 @@ public class WeatherClient {
     public interface ApiStores {
         /**
          * 获取天气信息
-         * http://www.weather.com.cn/data/cityinfo/101210101.html
+         * http://wthrcdn.etouch.cn/weather_mini?city=杭州
          * @param cityId 城市id号，杭州为101210101
          * @return
          */
-        @GET("data/cityinfo/{cityId}.html")
-        Call<WeatherJson> getWeather(@Path("cityId") String cityId);
+        @GET("weather_mini?")
+        Call<WeatherRoot> getWeather(@Query("city") String city);
     }
 
 }
